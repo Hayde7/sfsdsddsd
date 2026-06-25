@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝑃𝑎𝑟𝑎 Mi Niña ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+ background:linear-gradient(135deg,#ffd6eb,#ffc2e2,#ffadd8);
+ overflow-x:hidden;
+ overflow-y:auto;
+ min-height:100vh;
+}
+.screen{
+ position:relative;
+ width:100%;
+ min-height:100vh;
+ display:none;
+ justify-content:center;
+ align-items:flex-start;
+ text-align:center;
+ padding:30px;
+ overflow-y:auto;
+ opacity:0;
+ transition:opacity 0.5s ease;
+}
+
+
+.screen.active{
+ display:flex;
+ opacity:1;
+}
+
+
+.card{
+ background:#ffc1dd;
+ border:1px solid rgba(255,255,255,0.6);
+ padding:40px;
+ border-radius:28px;
+ box-shadow:
+ 0 10px 30px rgba(255,20,147,0.15),
+ inset 0 1px 0 rgba(255,255,255,0.6);
+ max-width:700px;
+ width:100%;
+ backdrop-filter:blur(6px);
+ transition:.3s;
+
+ margin:auto;
+ margin-top:40px;
+ margin-bottom:40px;
+}
+
+.card:hover{transform:translateY(-3px) scale(1.01)}
+img{
+ max-width:100%;
+ height:auto;
+ border-radius:18px;
+ margin:15px auto 0 auto;
+ box-shadow:0 8px 20px rgba(0,0,0,0.15);
+ display:block;
+}
+h1,h2{color:#c2187a;margin-bottom:20px;font-weight:600}
+p{color:#333;font-size:17px}
+button{
+ background:linear-gradient(180deg,#8dffb8,#4be37c);
+ color:white;
+ border:none;
+ padding:25px 28px;
+ border-radius:30px;
+ font-size:16px;
+ cursor:pointer;
+ transition:.25s;
+ margin:20px auto 0 auto;
+ display:block;
+ box-shadow:0 4px 12px rgba(255,20,147,0.3);
+}
+button:hover{transform:scale(1.08);box-shadow:0 12px 25px rgba(255,20,147,.45)}
+button:active{transform:scale(0.96)}
+.gray{
+ background:linear-gradient(180deg,#e0e0e0,#cfcfcf);
+ color:#555;
+ box-shadow:
+ 0 8px 18px rgba(0,0,0,.15),
+ inset 0 1px 0 rgba(255,255,255,.7);
+}
+.memories{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:15px;
+ margin-top:20px;
+}
+.memory{
+ position:relative;
+ background:#fff;
+ padding:12px;
+ border-radius:6px;
+ box-shadow:
+ 0 10px 25px rgba(0,0,0,0.25),
+ 0 0 0 1px rgba(0,0,0,0.05);
+ border:none;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ overflow:hidden;
+}
+.memory img{
+ border-radius:2px;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ border-radius:18px;
+ box-shadow:none;
+ margin:0;
+}
+.heart{
+ position:absolute;
+ font-size:20px;
+ color:rgba(255,0,100,0.35);
+ animation:float linear infinite;
+}
+@keyframes float{
+ from{transform:translateY(100vh);opacity:0}
+ 20%{opacity:1}
+ to{transform:translateY(-10vh);opacity:0}
+}
+#final{
+ background: radial-gradient(circle at 70% 20%, #0d2a6b 0%, #05143a 40%, #000 100%);
+ color:white;
+
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:flex-start;
+
+ padding-top:60px;
+ padding-bottom:60px;
+ padding-left:20px;
+ padding-right:20px;
+
+ position:relative;
+
+ min-height:100vh;
+
+ overflow-x:hidden;
+ overflow-y:auto;
+
+ text-align:center;
+}
+ 
+#final.active{
+ display:flex;
+}
+.moon{
+ position:absolute;
+
+ top:40px;
+ right:40px;
+
+ width:140px;
+ height:140px;
+
+ border-radius:50%;
+
+ background:
+  radial-gradient(circle at 30% 30%, #d0d0d0 8px, transparent 9px),
+  radial-gradient(circle at 65% 25%, #c8c8c8 6px, transparent 7px),
+  radial-gradient(circle at 55% 55%, #bfbfbf 12px, transparent 13px),
+  radial-gradient(circle at 35% 65%, #cfcfcf 7px, transparent 8px),
+  radial-gradient(circle at 75% 70%, #b5b5b5 9px, transparent 10px),
+  radial-gradient(circle at 50% 40%, #d9d9d9 5px, transparent 6px),
+  radial-gradient(circle at center, #f4f4f4 60%, #cfcfcf 85%, #a8a8a8 100%);
+
+ box-shadow:
+  0 0 40px rgba(255,255,255,0.9),
+  0 0 100px rgba(255,255,255,0.6),
+  inset -20px -20px 40px rgba(0,0,0,0.35),
+  inset 10px 10px 25px rgba(255,255,255,0.5);
+
+ z-index:5;
+}
+
+
+.star{
+ position:absolute;
+ background:white;
+ border-radius:50%;
+ animation:
+ twinkle 3s infinite ease-in-out,
+ moveStar linear infinite;
+}
+
+@keyframes moveStar{
+ from{
+  transform:translateY(0px);
+ }
+ to{
+  transform:translateY(40px);
+ }
+}
+.comet{
+ position:absolute;
+ width:3px;
+ height:3px;
+ background:white;
+ border-radius:50%;
+ box-shadow:0 0 10px white, 0 0 20px white;
+ animation:cometFall linear infinite;
+}
+
+@keyframes cometFall{
+ from{
+  transform:translate(0,0);
+  opacity:1;
+ }
+ to{
+  transform:translate(-300px,300px);
+  opacity:0;
+ }
+}
+
+#typeText{
+
+ position:relative;
+ z-index:10;
+
+ margin-top:180px;
+
+ max-width:600px;
+ width:90%;
+
+ text-align:center;
+
+ line-height:1.8;
+ white-space:pre-wrap;
+
+ font-size:18px;
+
+ color:#ffffff;
+
+ text-shadow:
+ 0 0 10px rgba(255,255,255,.4),
+ 0 0 20px rgba(255,255,255,.2);
+
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+ }
+ /* corazones laterales */
+.sideHearts{
+ position:fixed;
+ top:0;
+ bottom:0;
+ width:70px;
+ pointer-events:none;
+ z-index:0;
+}
+
+#heartsLeft{left:10px;}
+#heartsRight{right:10px;}
+
+.sideHearts span{
+ position:absolute;
+ color:#ff69b4;
+ opacity:0.5;
+ animation:floatSide linear infinite;
+}
+
+@keyframes floatSide{
+ from{
+  transform:translateY(100vh);
+  opacity:0;
+ }
+ 20%{opacity:0.6}
+ to{
+  transform:translateY(-10vh);
+  opacity:0;
+ }
+}
+@media(max-width:600px){
+
+ .moon{
+  top:20px;
+  right:20px;
+  width:100px;
+  height:100px;
+ }
+
+ #typeText{
+  margin-top:140px;
+  font-size:16px;
+ }
+
+}
+
+</style>
+</head>
+<body>
+ <div id="heartsLeft" class="sideHearts"></div>
+<div id="heartsRight" class="sideHearts"></div>
+
+<div class="screen active" id="step1">
+ <div class="card">
+  <h1>¡𝐹𝑒𝑙𝑖𝑧 𝑆𝑎𝑛 𝑉𝑎𝑙𝑒𝑛𝑡𝑖𝑛 𝑁𝑎𝑠ℎ!❤️</h1>
+  <img src="https://public.youware.com/users-website-assets/prod/dc0b63c4-fad2-4b40-a3f7-ccccc84fa74d/44f8e4f08a2342bea993471a3209bf2b.gif">
+  <button onclick="nextStep()">Siguiente</button>
+ </div>
+</div>
+
+<div class="screen" id="step2">
+ <div class="card">
+  <h2>𝑁𝑢𝑒𝑠𝑡𝑟𝑜𝑠 𝑟𝑒𝑐𝑢𝑒𝑟𝑑𝑖𝑡𝑜𝑠 📸</h2>
+  <div class="memories">
+   <div class="memory"><img src="https://i.postimg.cc/t4VY2BB8/IMG-20260531-005055-377.jpg"></div>
+   <div class="memory"><img src="https://i.postimg.cc/Xvb7x4GJ/IMG-20260611-025456-256.jpg"></div>
+   <div class="memory"><img src="https://i.postimg.cc/x1K9XhxQ/IMG-20260609-202423-962.jpg"></div>
+   <div class="memory"><img src="https://i.postimg.cc/WzBP3w0F/IMG-20260527-224046-974.jpg"></div>
+  </div>
+  <button onclick="nextStep()">Siguiente</button>
+ </div>
+</div>
+
+<div class="screen" id="step3">
+ <div class="card">
+  <h2>𝑈𝑛𝑎 𝑐𝑎𝑛𝑐𝑖ó𝑛 𝑠𝑜𝑙𝑜 𝑝𝑎𝑟𝑎 𝑣𝑜𝑠 🎵</h2>
+  <p>"𝑄𝑢𝑖𝑒𝑟𝑜 𝑑𝑒𝑑𝑖𝑐𝑎𝑟𝑡𝑒 𝑒𝑠𝑡𝑎 𝑐𝑎𝑛𝑐𝑖ó𝑛 𝑝𝑜𝑟𝑞𝑢𝑒, 𝑐𝑢𝑎𝑛𝑑𝑜 𝑙𝑎 𝑒𝑠𝑐𝑢𝑐ℎ𝑜, 𝑝𝑖𝑒𝑛𝑠𝑜 𝑒𝑛 𝑡𝑖 𝑠𝑖𝑛 𝑝𝑒𝑛𝑠𝑎𝑟𝑙𝑜 𝑑𝑜𝑠 𝑣𝑒𝑐𝑒𝑠.
+
+𝑃𝑜𝑟𝑞𝑢𝑒 𝑡𝑖𝑒𝑛𝑒𝑠 𝑎𝑙𝑔𝑜 𝑞𝑢𝑒 𝑛𝑜 𝑠é 𝑒𝑥𝑝𝑙𝑖𝑐𝑎𝑟 𝑑𝑒𝑙 𝑡𝑜𝑑𝑜, 𝑝𝑒𝑟𝑜 𝑞𝑢𝑒 𝑠𝑒 𝑠𝑖𝑒𝑛𝑡𝑒 𝑑𝑖𝑠𝑡𝑖𝑛𝑡𝑜. 𝐴𝑙𝑔𝑜 𝑞𝑢𝑒 𝑚𝑒 𝑑𝑎 𝑐𝑎𝑙𝑚𝑎, 𝑞𝑢𝑒 𝑚𝑒 ℎ𝑎𝑐𝑒 𝑠𝑜𝑛𝑟𝑒í𝑟, 𝑞𝑢𝑒 𝑚𝑒 ℎ𝑎𝑐𝑒 𝑞𝑢𝑒𝑟𝑒𝑟 𝑞𝑢𝑒𝑑𝑎𝑟𝑚𝑒 ℎ𝑎𝑏𝑙𝑎𝑛𝑑𝑜 𝑐𝑜𝑛𝑡𝑖𝑔𝑜 𝑚á𝑠 𝑡𝑖𝑒𝑚𝑝𝑜 𝑑𝑒𝑙 𝑞𝑢𝑒 𝑝𝑙𝑎𝑛𝑒𝑎𝑏𝑎.
+
+𝑇𝑒 𝑙𝑎 𝑑𝑒𝑑𝑖𝑐𝑜 𝑝𝑜𝑟𝑞𝑢𝑒 𝑚𝑒 𝑔𝑢𝑠𝑡𝑎 𝑞𝑢𝑖é𝑛 𝑒𝑟𝑒𝑠, 𝑐ó𝑚𝑜 𝑒𝑟𝑒𝑠 𝑐𝑜𝑛𝑚𝑖𝑔𝑜 𝑦 𝑐ó𝑚𝑜 ℎ𝑎𝑐𝑒𝑠 𝑞𝑢𝑒 𝑡𝑜𝑑𝑜 𝑠𝑒 𝑠𝑖𝑒𝑛𝑡𝑎 𝑛𝑎𝑡𝑢𝑟𝑎𝑙.
+
+𝑌 𝑝𝑜𝑟𝑞𝑢𝑒, 𝑠𝑖𝑚𝑝𝑙𝑒𝑚𝑒𝑛𝑡𝑒… 𝑒𝑟𝑒𝑠 𝑚𝑖 𝑡𝑖𝑝𝑜 𝑑𝑒 𝑝𝑒𝑟𝑠𝑜𝑛𝑎. ❤️"</p>
+  <iframe style="margin-top:15px;border-radius:16px" width="100%" height="200" src="https://www.youtube.com/embed/_R3B2Xr8kwQ" allowfullscreen></iframe>
+  <button onclick="window.open('https://youtu.be/_R3B2Xr8kwQ','_blank')">Abrir canción 💗</button>
+  <button onclick="nextStep()">Siguiente</button>
+ </div>
+</div>
+
+<div class="screen" id="step4">
+ <div class="card">
+  <h2>𝑇𝑒 𝑒𝑠𝑐𝑟𝑖𝑏í 𝑢𝑛𝑎 𝑐𝑎𝑟𝑡𝑎... 💌</h2>
+  <img src="https://public.youware.com/users-website-assets/prod/dc0b63c4-fad2-4b40-a3f7-ccccc84fa74d/407167ae33bc48c38cfa54a5833a8fa7.gif">
+  <button onclick="nextStep()">Siguiente</button>
+ </div>
+</div>
+
+<div class="screen" id="step5">
+ <div class="card">
+  <h2>¿𝑄𝑢𝑖𝑒𝑟𝑒𝑠 𝑎𝑏𝑟𝑖𝑟𝑙𝑎? 👀</h2>
+  <img src="https://public.youware.com/users-website-assets/prod/dc0b63c4-fad2-4b40-a3f7-ccccc84fa74d/282a71b095b04d2188dfe8c664a1ae44.gif">
+  <button onclick="nextStep()">SÍ</button>
+  <button class="gray" id="noBtn">NO</button>
+ </div>
+</div>
+
+<div class="screen" id="step6">
+ <div class="card">
+  <h2>𝑃𝑎𝑟𝑎 𝑁𝑎𝑠ℎ ❤️</h2>
+  <p style="text-align:left">
+   𝑀𝑖 𝑞𝑢𝑒𝑟𝑖𝑑𝑎 𝑁𝑎𝑠ℎ:<br><br>
+𝐸𝑠𝑡𝑒 𝑆𝑎𝑛 𝑉𝑎𝑙𝑒𝑛𝑡í𝑛 𝑞𝑢𝑖𝑒𝑟𝑜 𝑞𝑢𝑒 𝑠𝑒𝑝𝑎𝑠 𝑞𝑢𝑒 𝑜𝑐𝑢𝑝á𝑠 𝑢𝑛 𝑙𝑢𝑔𝑎𝑟 𝑚𝑢𝑦 𝑖𝑚𝑝𝑜𝑟𝑡𝑎𝑛𝑡𝑒 𝑒𝑛 𝑚𝑖 𝑐𝑜𝑟𝑎𝑧ó𝑛.
+𝑀𝑒 𝑖𝑚𝑝𝑜𝑟𝑡𝑎 𝑙𝑜 𝑞𝑢𝑒 𝑠𝑒𝑛𝑡í𝑠, 𝑙𝑜 𝑞𝑢𝑒 𝑝𝑒𝑛𝑠á𝑠 𝑦 𝑙𝑜 𝑞𝑢𝑒 𝑠𝑜𝑠, 𝑖𝑛𝑐𝑙𝑢𝑠𝑜 𝑐𝑢𝑎𝑛𝑑𝑜 𝑛𝑜 𝑙𝑜 𝑑𝑒𝑐í𝑠.
+
+𝐷𝑒𝑠𝑑𝑒 𝑞𝑢𝑒 𝑎𝑝𝑎𝑟𝑒𝑐𝑖𝑠𝑡𝑒, 𝑚𝑢𝑐ℎ𝑎𝑠 𝑐𝑜𝑠𝑎𝑠 𝑐𝑎𝑚𝑏𝑖𝑎𝑟𝑜𝑛 𝑠𝑖𝑛 𝑞𝑢𝑒 𝑚𝑒 𝑑𝑖𝑒𝑟𝑎 𝑐𝑢𝑒𝑛𝑡𝑎.
+𝐿𝑎𝑠 𝑐𝑎𝑛𝑐𝑖𝑜𝑛𝑒𝑠 𝑠𝑢𝑒𝑛𝑎𝑛 𝑑𝑖𝑠𝑡𝑖𝑛𝑡𝑜, 𝑙𝑜𝑠 𝑑í𝑎𝑠 𝑝𝑒𝑠𝑎𝑛 𝑚𝑒𝑛𝑜𝑠 𝑦 𝑙𝑜𝑠 𝑚𝑜𝑚𝑒𝑛𝑡𝑜𝑠 𝑠𝑖𝑚𝑝𝑙𝑒𝑠 𝑠𝑒 𝑣𝑜𝑙𝑣𝑖𝑒𝑟𝑜𝑛 𝑒𝑠𝑝𝑒𝑐𝑖𝑎𝑙𝑒𝑠 𝑠𝑜𝑙𝑜 𝑝𝑜𝑟 𝑐𝑜𝑚𝑝𝑎𝑟𝑡𝑖𝑟𝑙𝑜𝑠 𝑐𝑜𝑛 𝑣𝑜𝑠.
+
+𝑇𝑜𝑑𝑎𝑣í𝑎 𝑟𝑒𝑐𝑢𝑒𝑟𝑑𝑜 𝑒𝑠𝑒 𝑑í𝑎 𝑒𝑛 𝑒𝑙 𝑡𝑎𝑙𝑙𝑒𝑟, 𝑐𝑢𝑎𝑛𝑑𝑜 𝑒𝑛𝑡𝑟𝑎𝑠𝑡𝑒 𝑦 𝑞𝑢𝑒𝑟í𝑎𝑠 𝑢𝑛𝑎 𝑠𝑘𝑖𝑛. 𝑌𝑜 𝑚𝑒 ℎ𝑎𝑏í𝑎 𝑙𝑒𝑣𝑎𝑛𝑡𝑎𝑑𝑜 𝑏𝑖𝑒𝑛 ℎ𝑢𝑚𝑖𝑙𝑑𝑒, 𝑠𝑖𝑛 𝑖𝑚𝑎𝑔𝑖𝑛𝑎𝑟 𝑞𝑢𝑒 𝑒𝑠𝑒 𝑚𝑜𝑚𝑒𝑛𝑡𝑜 𝑖𝑏𝑎 𝑎 𝑞𝑢𝑒𝑑𝑎𝑟𝑠𝑒 𝑡𝑎𝑛 𝑚𝑎𝑟𝑐𝑎𝑑𝑜 𝑒𝑛 𝑚í. 𝐹𝑢𝑖𝑚𝑜𝑠 𝑎 𝑙𝑎 𝑡𝑖𝑒𝑛𝑑𝑎 𝑑𝑒 𝑟𝑜𝑝𝑎 𝑦 𝑡𝑒 𝑙𝑎 𝑐𝑜𝑚𝑝𝑟é, 𝑦 𝑙𝑜 𝑞𝑢𝑒 𝑝𝑎𝑟𝑒𝑐í𝑎 𝑎𝑙𝑔𝑜 𝑠𝑖𝑚𝑝𝑙𝑒 𝑡𝑒𝑟𝑚𝑖𝑛ó 𝑠𝑖𝑒𝑛𝑑𝑜 𝑒𝑙 𝑖𝑛𝑖𝑐𝑖𝑜 𝑑𝑒 𝑎𝑙𝑔𝑜 𝑞𝑢𝑒 𝑗𝑎𝑚á𝑠 𝑒𝑠𝑝𝑒𝑟é. 𝐷𝑒𝑠𝑑𝑒 𝑒𝑠𝑒 𝑖𝑛𝑠𝑡𝑎𝑛𝑡𝑒 𝑒𝑚𝑝𝑒𝑧𝑎𝑚𝑜𝑠 𝑎 ℎ𝑎𝑏𝑙𝑎𝑟 𝑚á𝑠, 𝑦 𝑠𝑖𝑛 𝑑𝑎𝑟𝑚𝑒 𝑐𝑢𝑒𝑛𝑡𝑎 𝑒𝑚𝑝𝑒𝑐é 𝑎 𝑒𝑠𝑝𝑒𝑟𝑎𝑟 𝑐𝑎𝑑𝑎 𝑐𝑜𝑛𝑣𝑒𝑟𝑠𝑎𝑐𝑖ó𝑛, 𝑐𝑎𝑑𝑎 𝑚𝑜𝑚𝑒𝑛𝑡𝑜.
+
+𝑇𝑎𝑚𝑏𝑖é𝑛 𝑟𝑒𝑐𝑢𝑒𝑟𝑑𝑜 𝑛𝑢𝑒𝑠𝑡𝑟𝑎 𝑝𝑟𝑖𝑚𝑒𝑟𝑎 𝑐𝑖𝑡𝑎. 𝑌𝑜 𝑒𝑠𝑡𝑎𝑏𝑎 𝑏𝑖𝑒𝑛 𝑛𝑒𝑟𝑣𝑖𝑜𝑠𝑜, 𝑐𝑜𝑛 𝑒𝑠𝑎 𝑚𝑒𝑧𝑐𝑙𝑎 𝑑𝑒 𝑒𝑚𝑜𝑐𝑖ó𝑛 𝑦 𝑚𝑖𝑒𝑑𝑜 𝑞𝑢𝑒 𝑎𝑝𝑎𝑟𝑒𝑐𝑒 𝑐𝑢𝑎𝑛𝑑𝑜 𝑎𝑙𝑔𝑜 𝑡𝑒 𝑖𝑚𝑝𝑜𝑟𝑡𝑎 𝑑𝑒 𝑣𝑒𝑟𝑑𝑎𝑑. 𝐸𝑛 𝑐𝑎𝑚𝑏𝑖𝑜, 𝑣𝑜𝑠 𝑒𝑠𝑡𝑎𝑏𝑎𝑠 𝑡𝑎𝑛 𝑡𝑟𝑎𝑛𝑞𝑢𝑖𝑙𝑎, 𝑡𝑎𝑛 𝑛𝑎𝑡𝑢𝑟𝑎𝑙, 𝑦 𝑒𝑠𝑜 𝑚𝑒 𝑒𝑛𝑐𝑎𝑛𝑡ó. 𝐸𝑟𝑎𝑠 𝑣𝑜𝑠 𝑙𝑎 𝑞𝑢𝑒 𝑠𝑎𝑐𝑎𝑏𝑎 𝑡𝑒𝑚𝑎, 𝑙𝑎 𝑞𝑢𝑒 𝑙𝑙𝑒𝑛𝑎𝑏𝑎 𝑙𝑜𝑠 𝑠𝑖𝑙𝑒𝑛𝑐𝑖𝑜𝑠, 𝑙𝑎 𝑞𝑢𝑒 𝑚𝑒 ℎ𝑎𝑐í𝑎 𝑠𝑒𝑛𝑡𝑖𝑟 𝑐ó𝑚𝑜𝑑𝑜 𝑠𝑖𝑛 𝑑𝑎𝑟𝑡𝑒 𝑐𝑢𝑒𝑛𝑡𝑎. 𝐿𝑜𝑔𝑟𝑎𝑠𝑡𝑒 𝑞𝑢𝑒 𝑝𝑜𝑐𝑜 𝑎 𝑝𝑜𝑐𝑜 𝑠𝑒 𝑚𝑒 𝑓𝑢𝑒𝑟𝑎 𝑙𝑎 𝑝𝑒𝑛𝑎, 𝑦 𝑒𝑠𝑜 𝑛𝑜 𝑒𝑠 𝑎𝑙𝑔𝑜 𝑞𝑢𝑒 𝑝𝑎𝑠𝑒 𝑠𝑒𝑔𝑢𝑖𝑑𝑜 𝑐𝑜𝑛𝑚𝑖𝑔𝑜. 𝐸𝑠𝑒 𝑑í𝑎 𝑒𝑛𝑡𝑒𝑛𝑑í 𝑞𝑢𝑒 ℎ𝑎𝑏í𝑎 𝑎𝑙𝑔𝑜 𝑒𝑠𝑝𝑒𝑐𝑖𝑎𝑙 𝑒𝑛 𝑣𝑜𝑠, 𝑎𝑙𝑔𝑜 𝑞𝑢𝑒 𝑚𝑒 ℎ𝑎𝑐í𝑎 𝑠𝑒𝑛𝑡𝑖𝑟 𝑑𝑖𝑓𝑒𝑟𝑒𝑛𝑡𝑒.
+
+𝐷𝑒𝑠𝑑𝑒 𝑒𝑛𝑡𝑜𝑛𝑐𝑒𝑠, 𝑎𝑙𝑔𝑜 𝑒𝑛 𝑚í 𝑐𝑎𝑚𝑏𝑖ó. 𝐸𝑚𝑝𝑒𝑐é 𝑎 𝑣𝑒𝑟𝑡𝑒 𝑑𝑖𝑠𝑡𝑖𝑛𝑡𝑜, 𝑎 𝑝𝑒𝑛𝑠𝑎𝑟𝑡𝑒 𝑚á𝑠, 𝑎 𝑠𝑒𝑛𝑡𝑖𝑟 𝑢𝑛𝑎 𝑐𝑜𝑛𝑒𝑥𝑖ó𝑛 𝑞𝑢𝑒 𝑛𝑜 𝑝𝑢𝑒𝑑𝑜 𝑒𝑥𝑝𝑙𝑖𝑐𝑎𝑟 𝑑𝑒𝑙 𝑡𝑜𝑑𝑜, 𝑝𝑒𝑟𝑜 𝑞𝑢𝑒 𝑠é 𝑞𝑢𝑒 𝑒𝑠 𝑟𝑒𝑎𝑙. 𝑀𝑒 𝑔𝑢𝑠𝑡𝑎 𝑞𝑢𝑖𝑒𝑛 𝑠𝑜𝑦 𝑐𝑢𝑎𝑛𝑑𝑜 𝑒𝑠𝑡𝑜𝑦 𝑐𝑜𝑛 𝑣𝑜𝑠, 𝑚𝑒 𝑔𝑢𝑠𝑡𝑎 𝑐ó𝑚𝑜 𝑚𝑒 ℎ𝑎𝑐é𝑠 𝑠𝑒𝑛𝑡𝑖𝑟 𝑠𝑖𝑛 𝑠𝑖𝑞𝑢𝑖𝑒𝑟𝑎 𝑖𝑛𝑡𝑒𝑛𝑡𝑎𝑟𝑙𝑜.
+
+𝐺𝑟𝑎𝑐𝑖𝑎𝑠 𝑝𝑜𝑟 𝑒𝑠𝑡𝑎𝑟, 𝑝𝑜𝑟 𝑞𝑢𝑒𝑑𝑎𝑟𝑡𝑒 𝑦 𝑝𝑜𝑟 𝑡𝑢 𝑓𝑜𝑟𝑚𝑎 𝑡𝑎𝑛 𝑙𝑖𝑛𝑑𝑎 𝑑𝑒 𝑞𝑢𝑒𝑟𝑒𝑟.
+𝑂𝑗𝑎𝑙á 𝑝𝑜𝑑𝑎𝑚𝑜𝑠 𝑠𝑒𝑔𝑢𝑖𝑟 𝑒𝑙𝑖𝑔𝑖é𝑛𝑑𝑜𝑛𝑜𝑠, 𝑐𝑢𝑖𝑑á𝑛𝑑𝑜𝑛𝑜𝑠 𝑦 𝑐𝑜𝑛𝑠𝑡𝑟𝑢𝑦𝑒𝑛𝑑𝑜 𝑟𝑒𝑐𝑢𝑒𝑟𝑑𝑜𝑠 𝑗𝑢𝑛𝑡𝑜𝑠. 𝑂𝑗𝑎𝑙á 𝑙𝑎 𝑣𝑖𝑑𝑎 𝑛𝑜𝑠 𝑟𝑒𝑔𝑎𝑙𝑒 𝑚á𝑠 𝑚𝑜𝑚𝑒𝑛𝑡𝑜𝑠, 𝑚á𝑠 𝑚𝑖𝑟𝑎𝑑𝑎𝑠 𝑦 𝑚á𝑠 ℎ𝑖𝑠𝑡𝑜𝑟𝑖𝑎𝑠 𝑞𝑢𝑒 𝑎𝑙𝑔ú𝑛 𝑑í𝑎 𝑝𝑜𝑑𝑎𝑚𝑜𝑠 𝑟𝑒𝑐𝑜𝑟𝑑𝑎𝑟 𝑐𝑜𝑛 𝑢𝑛𝑎 𝑠𝑜𝑛𝑟𝑖𝑠𝑎.
+
+𝑄𝑢𝑖𝑒𝑟𝑜 𝑞𝑢𝑒 𝑠𝑒𝑝𝑎𝑠 𝑞𝑢𝑒 𝑠𝑜𝑠 𝑎𝑙𝑔𝑢𝑖𝑒𝑛 𝑚𝑢𝑦 𝑒𝑠𝑝𝑒𝑐𝑖𝑎𝑙 𝑝𝑎𝑟𝑎 𝑚í, 𝑎𝑙𝑔𝑢𝑖𝑒𝑛 𝑞𝑢𝑒 𝑙𝑙𝑒𝑔ó 𝑠𝑖𝑛 𝑎𝑣𝑖𝑠𝑜 𝑦 𝑡𝑒𝑟𝑚𝑖𝑛ó 𝑐𝑜𝑛𝑣𝑖𝑟𝑡𝑖é𝑛𝑑𝑜𝑠𝑒 𝑒𝑛 𝑢𝑛𝑎 𝑝𝑎𝑟𝑡𝑒 𝑖𝑚𝑝𝑜𝑟𝑡𝑎𝑛𝑡𝑒 𝑑𝑒 𝑚𝑖 𝑣𝑖𝑑𝑎.
+
+𝑇𝑒 𝑞𝑢𝑖𝑒𝑟𝑜 𝑚á𝑠 𝑑𝑒 𝑙𝑜 𝑞𝑢𝑒 𝑎 𝑣𝑒𝑐𝑒𝑠 𝑠é 𝑑𝑒𝑐𝑖𝑟 𝑐𝑜𝑛 𝑝𝑎𝑙𝑎𝑏𝑟𝑎𝑠.
+ </p>
+  <button onclick="nextStep()">Siguiente</button>
+ </div>
+</div>
+
+<!-- FINAL -->
+<div class="screen" id="final">
+<div class="moon"></div>
+<div id="typeText"></div>
+
+<audio id="finalAudio" preload="auto" loop>
+<source src="nash.mp3" type="audio/mpeg">
+</audio>
+</div>
+ 
+<script>
+let current=1;
+function nextStep(){
+document.getElementById("step"+current)?.classList.remove("active");
+current++;
+if(current<=6){
+document.getElementById("step"+current).classList.add("active");
+}else{
+document.getElementById("final").classList.add("active");
+startFinal();
+}}
+
+function startFinal(){
+
+// 🎵 REPRODUCIR AUDIO CON FADE IN
+const audio=document.getElementById("finalAudio");
+audio.volume=0;
+audio.play();
+
+let vol=0;
+const fade=setInterval(()=>{
+if(vol<0.7){
+vol+=0.02;
+audio.volume=vol;
+}else{
+clearInterval(fade);
+}
+},120);
+
+// ✨ estrellas
+for(let i=0;i<80;i++){
+const star=document.createElement("div");
+star.className="star";
+star.style.width=Math.random()*3+1+"px";
+star.style.height=star.style.width;
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+document.getElementById("final").appendChild(star);
+}
+// ☄️ cometas
+for(let i=0;i<8;i++){
+
+ const comet=document.createElement("div");
+
+ comet.className="comet";
+
+ comet.style.left=Math.random()*100+"vw";
+
+ comet.style.top=Math.random()*50+"vh";
+
+ comet.style.animationDuration=(Math.random()*3+3)+"s";
+
+ comet.style.animationDelay=(Math.random()*5)+"s";
+
+ document.getElementById("final").appendChild(comet);
+}
+
+// ✍️ texto animado
+const text=`𝑌 𝑠𝑖 𝑡𝑢𝑣𝑖𝑒𝑟𝑎 𝑙𝑎 𝑝𝑜𝑠𝑖𝑏𝑖𝑙𝑖𝑑𝑎𝑑 𝑑𝑒 𝑣𝑜𝑙𝑣𝑒𝑟 𝑎 𝑒𝑛𝑎𝑚𝑜𝑟𝑎𝑟𝑚𝑒 𝑑𝑒 𝑡𝑖 𝑐𝑜𝑚𝑜 𝑎𝑞𝑢𝑒𝑙𝑙𝑎 𝑝𝑟𝑖𝑚𝑒𝑟𝑎 𝑣𝑒𝑧,𝑙𝑜 ℎ𝑎𝑟í𝑎 𝑠𝑖𝑛 𝑝𝑒𝑛𝑠𝑎𝑟𝑙𝑜 𝑑𝑜𝑠 𝑣𝑒𝑐𝑒𝑠, 𝑙𝑜 ℎ𝑎𝑟í𝑎 𝑐𝑜𝑛 𝑙𝑎 𝑚𝑖𝑠𝑚𝑎
+𝑐𝑒𝑟𝑡𝑒𝑧𝑎 𝑑𝑒 𝑞𝑢𝑒 𝑡ú 𝑒𝑟𝑎𝑠 𝑚𝑖 𝑑𝑒𝑠𝑡𝑖𝑛𝑜, 𝑝𝑜𝑟𝑞𝑢𝑒 ℎ𝑎𝑦 𝑐𝑜𝑠𝑎𝑠 𝑒𝑛 𝑙𝑎 𝑣𝑖𝑑𝑎 𝑞𝑢𝑒 𝑛𝑜 𝑠𝑒 𝑒𝑥𝑝𝑙𝑖𝑐𝑎𝑛,
+𝑠𝑜𝑙𝑜 𝑠𝑒 𝑠𝑖𝑒𝑛𝑡𝑒𝑛,
+𝑦 𝑙𝑜 𝑛𝑢𝑒𝑠𝑡𝑟𝑜 𝑓𝑢𝑒 𝑒𝑠𝑜,
+𝑢𝑛 𝑖𝑚𝑝𝑢𝑙𝑠𝑜 𝑑𝑒𝑙 𝑎𝑙𝑚𝑎,
+𝑢𝑛𝑎 𝑐𝑎𝑠𝑢𝑎𝑙𝑖𝑑𝑎𝑑 𝑣𝑒𝑠𝑡𝑖𝑑𝑎 𝑑𝑒 𝑒𝑡𝑒𝑟𝑛𝑖𝑑𝑎𝑑.
+𝐶𝑎𝑑𝑎 𝑟𝑒𝑐𝑢𝑒𝑟𝑑𝑜 𝑡𝑢𝑦𝑜 𝑒𝑠 𝑐𝑜𝑚𝑜 𝑢𝑛𝑎 𝑐ℎ𝑖𝑠𝑝𝑎
+𝑞𝑢𝑒 𝑚𝑒 𝑟𝑒𝑐𝑢𝑒𝑟𝑑𝑎 𝑞𝑢𝑖é𝑛 𝑒𝑟𝑎 𝑎𝑛𝑡𝑒𝑠 𝑑𝑒 𝑝𝑒𝑟𝑑𝑒𝑟𝑚𝑒.`;
+
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typeText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,40);
+}}
+setTimeout(type,2000);
+}
+ function crearCorazones(id,cantidad){
+
+ const container=document.getElementById(id);
+
+ for(let i=0;i<cantidad;i++){
+
+  const heart=document.createElement("span");
+
+  heart.innerHTML="💗";
+
+  heart.style.left=Math.random()*50+"px";
+
+  heart.style.fontSize=(Math.random()*12+16)+"px";
+
+  heart.style.animationDuration=(Math.random()*6+6)+"s";
+
+  heart.style.animationDelay=Math.random()*5+"s";
+
+  container.appendChild(heart);
+ }
+
+}
+
+crearCorazones("heartsLeft",12);
+crearCorazones("heartsRight",12);
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseenter", function(){
+
+ const x = Math.random() * 60 - 30;
+ const y = Math.random() * 40 - 20;
+
+ noBtn.style.transition = "0.2s ease";
+ noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+});
+
+
+
+</script>
